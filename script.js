@@ -66,7 +66,7 @@ const generateBotResponse = async (incomingMessageDiv) => {
       parts: [{ text: apiResponseText }],
     });
   } catch (error) {
-    // Handle error in API response
+    // error in API response
     console.log(error);
     messageElement.innerText = error.message;
     messageElement.style.color = "#ff0000";
@@ -156,26 +156,7 @@ fileCancelButton.addEventListener("click", () => {
   fileUploadWrapper.classList.remove("file-uploaded");
 });
 
-// emoji selection
-const picker = new EmojiMart.Picker({
-  theme: "light",
-  skinTonePosition: "none",
-  previewPosition: "none",
-  onEmojiSelect: (emoji) => {
-    const { selectionStart: start, selectionEnd: end } = messageInput;
-    messageInput.setRangeText(emoji.native, start, end, "end");
-    messageInput.focus();
-  },
-  onClickOutside: (e) => {
-    if (e.target.id === "emoji-picker") {
-      document.body.classList.toggle("show-emoji-picker");
-    } else {
-      document.body.classList.remove("show-emoji-picker");
-    }
-  },
-});
 
-document.querySelector(".chat-form").appendChild(picker);
 
 sendMessage.addEventListener("click", (e) => handleOutgoingMessage(e));
 document.querySelector("#file-upload").addEventListener("click", () => fileInput.click());
